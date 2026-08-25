@@ -1,0 +1,36 @@
+name: Run Automated Tests
+run-name: Test ${{ github.head_ref || github.ref_name }}
+
+on:
+  pull_request:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number ||
+    github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint&test:
+    runs-on: blacksmith-2vcpu-ubuntu-2404
+    steps:
+      - uses: actions/checkout@v7
+      - uses: voidzero-dev/setup-vp@v1
+        id: setup
+        with:
+          node-version: "lts"
+          version-file: package.json
+          cache: true
+          run-install: true
+      - name: Run checks
+        id: checks
+        run: |
+          vp check
+      - name: Run tests
+        id: tests
+        if: ${{ steps.setup.outcome == 'success' && !cancelled() }}
+        run: |
+          vp test

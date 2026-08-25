@@ -1,0 +1,61 @@
+{
+  "name": "oxlint-plugin-no-relative-import-paths",
+  "version": "0.1.0",
+  "description": "Oxlint plugin that requires absolute module specifiers instead of relative ones.",
+  "keywords": [
+    "absolute-path",
+    "import",
+    "oxlint",
+    "oxlint-plugin"
+  ],
+  "homepage": "https://github.com/millcrest/oxlint-plugin-no-relative-import-paths#readme",
+  "bugs": {
+    "url": "https://github.com/millcrest/oxlint-plugin-no-relative-import-paths/issues"
+  },
+  "license": "ISC",
+  "author": "Ben Boothby <ben.boothby@millcrest.com.au>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/millcrest/oxlint-plugin-no-relative-import-paths.git"
+  },
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "types": "./dist/index.d.mts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs",
+      "default": "./dist/index.mjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "release": "bumpp",
+    "prepublishOnly": "vp pack"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "bumpp": "^12.2.1",
+    "oxlint": "^1.80.0",
+    "typescript": "^7.0.2",
+    "vite-plus": "^0.3.0"
+  },
+  "peerDependencies": {
+    "oxlint": ">=1.0.0"
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "11.23.0",
+      "onFail": "download"
+    }
+  },
+  "engines": {
+    "node": "^20.19.0 || >=22.12.0"
+  }
+}
