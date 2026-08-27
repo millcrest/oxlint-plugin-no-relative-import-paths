@@ -43,7 +43,7 @@
     "bumpp": "^12.2.1",
     "oxlint": "^1.80.0",
     "typescript": "^7.0.2",
-    "vite-plus": "^0.3.0"
+    "vite-plus": "0.3.0"
   },
   "peerDependencies": {
     "oxlint": ">=1.0.0"
