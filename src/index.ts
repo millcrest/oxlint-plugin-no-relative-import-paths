@@ -109,6 +109,9 @@ const noRelativeImportPaths = {
         return;
       }
 
+      const filename = path.normalize(context.filename);
+      const cwd = path.normalize(context.cwd);
+
       const options = (context.options[0] ?? {}) as RuleOptions;
       const allowSameFolder = options.allowSameFolder ?? false;
       const rootDir = options.rootDir ?? "";
@@ -122,12 +125,9 @@ const noRelativeImportPaths = {
           return;
         }
         if (rootDir !== "") {
-          const absoluteRoot = path.join(context.cwd, rootDir);
-          const absoluteTarget = resolveFromFile(context.filename, specifier);
-          if (
-            !absoluteTarget.startsWith(absoluteRoot) ||
-            !context.filename.startsWith(absoluteRoot)
-          ) {
+          const absoluteRoot = path.join(cwd, rootDir);
+          const absoluteTarget = resolveFromFile(filename, specifier);
+          if (!absoluteTarget.startsWith(absoluteRoot) || !filename.startsWith(absoluteRoot)) {
             return;
           }
         }
@@ -135,13 +135,7 @@ const noRelativeImportPaths = {
         return;
       }
 
-      const nextSpecifier = toAbsoluteSpecifier(
-        specifier,
-        context.filename,
-        context.cwd,
-        rootDir,
-        prefix,
-      );
+      const nextSpecifier = toAbsoluteSpecifier(specifier, filename, cwd, rootDir, prefix);
 
       context.report({
         node: source,
