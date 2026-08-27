@@ -1,6 +1,6 @@
 {
   "name": "oxlint-plugin-no-relative-import-paths",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Oxlint plugin that requires absolute module specifiers instead of relative ones.",
   "keywords": [
     "absolute-path",
